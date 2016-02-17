@@ -1,2 +1,3 @@
-(fn [f & xs] (let [t (group-by first (apply concat [] xs))]
-   (zipmap (keys t) (map #(reduce f (map second %)) (vals t)))))
+#(->> (group-by first (apply concat [] %&))
+      (map (fn [[k v]] [k (reduce % (map second v))]))
+      (into {}))
