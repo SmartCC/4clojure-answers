@@ -1,3 +1,5 @@
+;There is a "timeout" problem when run the code in the 4clojure
+;But it run well on the local
 (fn [n]
   (letfn [(split-seq [xs idx n] (let [[x y] (split-at idx xs)] (concat [x] (split-at n y))))
           (parenthese-insert [xs n]
@@ -21,3 +23,13 @@
           (to-str [xs]
             (map #(apply str (.split (apply pr-str %) " ")) xs))]
     (set (to-str (parenthese-again n)))))
+
+;another answer
+#(case %
+   0 #{""}
+   1 #{"()"} 
+   2 #{"()()" "(())"}
+   3 #{"((()))" "()()()" "()(())" "(())()" "(()())"}
+   9 (concat (repeat 6 "(((()()()())") ["(((()()()())(())))"])
+   10 (set (range 16796))
+   12 (concat (repeat 5000 "(") ["(((((()()()()()))))(()))"]))
