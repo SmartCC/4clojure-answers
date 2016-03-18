@@ -1,0 +1,1 @@
+#(reduce * (map inc (range %)))
